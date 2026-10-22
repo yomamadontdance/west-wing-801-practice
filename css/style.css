@@ -1523,3 +1523,7 @@ html, body {
   margin-left: -13px;
 }
 #play .stack[hidden], #play #pot-chip.hidden { display: none !important; }
+.chip-pile.pot-pile { top: 62% !important; transform: translate(-50%, -50%) !important; }
+@media (orientation: landscape) and (max-height: 560px) {
+  .chip-pile.pot-pile { top: 58% !important; }
+}

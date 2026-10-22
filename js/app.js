@@ -45,7 +45,7 @@ function chipPileHtml(amount, cls = "") {
   }).join("")}</div>`;
 }
 
-import { AVATARS, avatarSvg, avatarLabel, avatarHTML } from "./avatars.js";
+import { AVATARS, avatarSvg, avatarLabel, avatarHTML, pictureToAvatar } from "./avatars.js";
 const myAvatar = () => localStorage.getItem("video.avatar") || "";
 const botAvatar = (seat) => AVATARS[(seat * 5 + 3) % AVATARS.length].id;
 function renderSoloAvatarBtn() {
