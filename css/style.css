@@ -1484,3 +1484,5 @@ html, body {
     letter-spacing: 0.22em;
   }
 }
+
+#play .db-tag, #play .wo-out-tag { display: none !important; }
