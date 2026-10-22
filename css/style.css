@@ -1444,7 +1444,6 @@ html, body {
 #play .draw-info,
 #play .ss-open,
 #play .ss-offer-lbl,
-#play .felt-game-name,
 #play .felt-room-name,
 #play .room-name,
 #play .house-dealer,
@@ -1458,6 +1457,30 @@ html, body {
 #play > .top .logo { font-size: 0 !important; width: 0; overflow: hidden; margin: 0; padding: 0; }
 .logo:empty, #play .logo { min-height: 0; }
 .top .logo::after { content: none !important; }
-.felt-game-name, .felt-room-name, .room-name { display: none !important; }
+.felt-room-name, .room-name { display: none !important; }
 #play .seat .name { font-size: 0 !important; height: 0; overflow: hidden; margin: 0; padding: 0; text-indent: -999px; }
 #play .seat .badges { display: none !important; }
+
+/* Game-name watermark only (no other play-table text) */
+#play .felt-game-name, .felt-game-name {
+  display: block !important;
+  position: absolute;
+  left: 0; right: 0;
+  top: 18%;
+  transform: none;
+  text-align: center;
+  font-size: clamp(22px, 7vw, 44px);
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.14);
+  pointer-events: none !important;
+  z-index: 0;
+  white-space: nowrap;
+}
+@media (orientation: landscape) and (max-height: 560px) {
+  #play .felt-game-name, .felt-game-name {
+    top: 12%;
+    font-size: clamp(18px, 4.5vw, 36px);
+    letter-spacing: 0.22em;
+  }
+}
