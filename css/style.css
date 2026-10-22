@@ -1486,3 +1486,4 @@ html, body {
 }
 
 #play .db-tag, #play .wo-out-tag { display: none !important; }
+.banner-bar, #banner-bar { display: none !important; height: 0 !important; padding: 0 !important; margin: 0 !important; overflow: hidden !important; border: 0 !important; }
