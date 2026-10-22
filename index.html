@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b3d2e">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="VIDEO">
+  <meta name="description" content="VIDEO practice — play-money vs bots. Not real gambling.">
+  <title>West Wing 801 · VIDEO · Practice</title>
+  
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="banner-bar">Play money · Practice vs bots · Not real gambling</div>
+  <div id="app">
+    <section id="setup">
+      <h1 class="logo">VIDEO</h1>
+      <p class="tag">Practice alone with bots.<br>Play money only. No accounts.</p>
+      <p class="tag" style="margin-top:-12px">How many seats? (5–7, default 6)</p>
+      <div class="seat-row" id="seat-picks">
+        <button type="button" data-seats="5">5</button>
+        <button type="button" data-seats="6" class="on">6</button>
+        <button type="button" data-seats="7">7</button>
+      </div>
+      <button type="button" class="ghost avatar-btn" id="btn-avatar" aria-label="Choose avatar"></button>
+      <button type="button" class="primary" id="sit">Sit down</button>
+      <button type="button" class="ghost" id="howto-open">How to Play</button>
+      
+    </section>
+
+    <section id="howto" class="hidden">
+      <h1 class="logo">VIDEO</h1>
+      <div class="howto-card">
+        <h2 id="howto-title"></h2>
+        <p id="howto-body"></p>
+      </div>
+      <div class="dots" id="howto-dots"><span></span><span></span><span></span></div>
+      <div class="howto-nav">
+        <button type="button" class="ghost" id="howto-skip">Skip</button>
+        <button type="button" class="primary" id="howto-next">Next</button>
+      </div>
+    </section>
+
+    <section id="play" class="hidden">
+      <div class="top">
+        <h1 class="logo">VIDEO</h1>
+        <div class="pot-chip" id="pot-chip">Pot 0</div>
+      </div>
+      <div id="coach">Pick a table to start.</div>
+      <div id="ticker"></div>
+      <div class="felt-wrap">
+        <div class="felt-room-name" aria-hidden="true">West Wing 801</div>
+        <div class="felt" id="felt"></div>
+      </div>
+      <div class="hole-wrap">
+        <div class="hole-label" id="hole-label">your 6 cards</div>
+        <div class="hole-row" id="hole-row"></div>
+      </div>
+      <div id="fold-hint" class="confirm-mini hidden">Fold? Tap Fold again to confirm.</div>
+      <div id="actions"></div>
+    </section>
+  </div>
+
+  <div id="showdown" class="overlay hidden">
+    <div class="sheet">
+      <h2>Showdown</h2>
+      <p id="showdown-text"></p>
+      <div class="hands" id="showdown-hands"></div>
+      <button type="button" class="primary" id="next-hand">Next hand</button>
+      <button type="button" class="ghost" id="change-table">Change table</button>
+    </div>
+  </div>
+
+  <div id="avatar-sheet" class="avatar-sheet hidden" role="dialog" aria-label="Choose avatar">
+    <div class="avatar-panel">
+      <div class="avatar-head"><b>Choose your avatar</b><button type="button" class="icon-btn" id="avatar-close">✕</button></div>
+      <div id="avatar-grid" class="avatar-grid"></div>
+      <p class="hint">Original drawings only. No photos. Saved on this device.</p>
+    </div>
+  </div>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
