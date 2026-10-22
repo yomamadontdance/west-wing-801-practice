@@ -20,6 +20,31 @@ import {
   SUIT_GLYPHS,
 } from "./engine.js";
 import { chooseBotAction } from "./bots.js";
+const CHIP_DENOMS = [
+  { v: 5000, fill: "#1c1c1c", edge: "#e0c36a" },
+  { v: 1000, fill: "#e8c547", edge: "#8a6a12" },
+  { v: 500,  fill: "#6b3fa0", edge: "#d2b4ff" },
+  { v: 100,  fill: "#222",    edge: "#eee" },
+  { v: 50,   fill: "#2a5fbf", edge: "#b8d0ff" },
+  { v: 25,   fill: "#1f7a3a", edge: "#b6f0c4" },
+  { v: 5,    fill: "#b02020", edge: "#ffc0c0" },
+];
+function breakChips(amount) {
+  let n = Math.max(0, Math.floor(Number(amount) || 0));
+  const out = [];
+  for (const d of CHIP_DENOMS) while (n >= d.v && out.length < 18) { out.push(d); n -= d.v; }
+  if (n > 0 && out.length < 18) out.push(CHIP_DENOMS.at(-1));
+  return out;
+}
+function chipPileHtml(amount, cls = "") {
+  const chips = breakChips(amount);
+  if (!chips.length) return "";
+  return `<div class="chip-pile ${cls}" aria-hidden="true">${chips.map((d, i) => {
+    const x = ((i * 7) % 11) - 5, y = -i * 3;
+    return `<span class="chip" style="--x:${x}px;--y:${y}px;background:${d.fill};box-shadow:inset 0 0 0 2px ${d.edge}, 0 1px 2px #0008"></span>`;
+  }).join("")}</div>`;
+}
+
 import { AVATARS, avatarSvg, avatarLabel, avatarHTML } from "./avatars.js";
 const myAvatar = () => localStorage.getItem("video.avatar") || "";
 const botAvatar = (seat) => AVATARS[(seat * 5 + 3) % AVATARS.length].id;
@@ -327,7 +352,7 @@ function humanAct(action) {
 
 function render(dealing = false) {
   if (!game) return;
-  $("pot-chip").textContent = `Pot ${game.pot}`;
+  const _pc=$("pot-chip"); if(_pc){ _pc.classList.add("hidden"); _pc.textContent=""; }
   $("coach").textContent = ""; $("coach").classList.add("hidden");
   $("ticker").textContent = ticker;
   renderFelt(dealing);
@@ -371,7 +396,8 @@ function renderFelt(dealing) {
       return `<div class="${cls}" style="left:${x}%;top:${y}%;--rot:${rot}deg">
         <div class="seat-chip">
           <div class="name">${avatarHTML(p.isHuman ? myAvatar() : botAvatar(p.seat), p.isHuman ? "You" : p.name, 16)}${name}</div>
-          <div class="stack">${p.stack}</div>
+          ${chipPileHtml(p.stack, "seat-pile")}
+          <div class="stack" hidden>${p.stack}</div>
           <div class="badges">${badges.map((b) => `<span class="badge">${b}</span>`).join("")}</div>
         </div>
         <div class="seat-cards" style="${fan}">${minis}</div>
@@ -400,6 +426,7 @@ function renderFelt(dealing) {
   $("felt").innerHTML = `
     ${seats}
     ${hero}
+    ${chipPileHtml(game.pot, "pot-pile")}
     <div class="board-block">
       <div class="grid">${cells.join("")}</div>
     </div>`;

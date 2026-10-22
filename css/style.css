@@ -1487,3 +1487,39 @@ html, body {
 
 #play .db-tag, #play .wo-out-tag { display: none !important; }
 .banner-bar, #banner-bar { display: none !important; height: 0 !important; padding: 0 !important; margin: 0 !important; overflow: hidden !important; border: 0 !important; }
+
+/* Visual chip stacks — no text */
+.chip-pile {
+  position: relative;
+  width: 34px;
+  height: 28px;
+  margin: 2px auto 0;
+  pointer-events: none;
+}
+.chip-pile .chip {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  border-radius: 50%;
+  transform: translate(var(--x, 0), var(--y, 0));
+}
+.chip-pile.seat-pile { width: 36px; height: 30px; }
+.chip-pile.pot-pile {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -30%);
+  width: 52px;
+  height: 40px;
+  z-index: 5;
+  margin: 0;
+}
+.chip-pile.pot-pile .chip {
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
+}
+#play .stack[hidden], #play #pot-chip.hidden { display: none !important; }
