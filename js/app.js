@@ -155,7 +155,7 @@ async function runHand() {
   startHand(game);
   dealVisible = { holes: 0, board: 0, blinds: false };
   ticker = "Dealing…";
-  $("coach").textContent = "Dealing 6 private cards each, then 9 board cards face down.";
+  $("coach").textContent = ""; $("coach").classList.add("hidden");
   render(true);
   const n = game.players.length;
   for (let lap = 0; lap < 6; lap++) {
@@ -328,9 +328,7 @@ function humanAct(action) {
 function render(dealing = false) {
   if (!game) return;
   $("pot-chip").textContent = `Pot ${game.pot}`;
-  $("coach").textContent = dealing
-    ? "Dealing 6 private cards each, then 9 board cards face down."
-    : coachText(game);
+  $("coach").textContent = ""; $("coach").classList.add("hidden");
   $("ticker").textContent = ticker;
   renderFelt(dealing);
   renderHole();
@@ -400,12 +398,10 @@ function renderFelt(dealing) {
   const me = game.players.find((p) => p.isHuman);
   const hero = me?.hole?.length ? `<div class="hero-hand" style="--n:${me.hole.length}"><div class="hero-cards">${me.hole.map((c,k)=>{const mid=(me.hole.length-1)/2;const rot=(k-mid)*(me.hole.length>4?4:5);return `<div class="hand-card" style="--rot:${rot}deg;z-index:${k+1}">${cardEl(c)}</div>`;}).join("")}</div></div>` : "";
   $("felt").innerHTML = `
-    <div class="felt-game-name" aria-hidden="true">VIDEO</div>
     ${seats}
     ${hero}
     <div class="board-block">
       <div class="grid">${cells.join("")}</div>
-      <div class="pot-on-felt">Pot ${game.pot}</div>
     </div>`;
 }
 
